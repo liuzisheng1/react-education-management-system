@@ -19,7 +19,26 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+
+    "baseUrl": ".",
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ],
+      "@/stores*": [
+        "./src/stores*"
+      ],
+      "@/components*": [
+        "./src/components*"
+      ],
+      "@/modules*": [
+        "./src/modules*"
+      ],
+      "@/utils*": [
+        "./src/utils*"
+      ],
+    }
   },
   "include": ["src"],
   "references": [{ "path": "./tsconfig.node.json" }]
