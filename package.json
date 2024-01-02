@@ -13,10 +13,14 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.2.6",
+    "@ant-design/pro-components": "^2.6.43",
     "@types/node": "^20.10.6",
     "ahooks": "^3.7.8",
+    "antd": "^5.12.6",
     "axios": "^1.6.3",
     "dayjs": "^1.11.10",
+    "echarts": "^5.4.3",
     "less": "^4.2.0",
     "less-loader": "^11.1.4",
     "lodash": "^4.17.21",
