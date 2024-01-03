@@ -3,10 +3,18 @@ import { useLocation, useRoutes, Location, useNavigate, NavigateFunction } from 
 import { RouteObject } from "@/router/type.ts"
 
 export const searchRouteDetail = (path: string, routes: RouteObject[]): RouteObject | null => {
-  routes.map((item) => {
-    if (item.path === path) return item
-    return item.children && searchRouteDetail(path, item.children)
-  })
+  for (const item of routes) {
+    if (item.path === path) {
+      return item
+    }
+    if (item.children) {
+      const routeDetail = searchRouteDetail(path, item.children)
+      if (routeDetail) {
+        return routeDetail
+      }
+    }
+  }
+  // 如果没有找到匹配的路由，则返回null
   return null
 }
 
@@ -28,5 +36,5 @@ export const RouterGuard = (routes: RouteObject[]) => {
     guard(location, navigate, routes)
   }, [location, navigate, routes])
   document.documentElement.scrollTo(0, 0)
-  return useRoutes(routes as never)
+  return useRoutes(routes as any)
 }
