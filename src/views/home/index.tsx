@@ -1,14 +1,9 @@
-import { ProForm, ProFormText } from "@ant-design/pro-components"
-
+import { Outlet } from "react-router-dom"
 const Home = () => {
   return (
-    <ProForm
-      onFinish={async (values) => {
-        console.log(values)
-      }}
-    >
-      <ProFormText name="name" label="姓名" />
-    </ProForm>
+    <div>
+      <Outlet />
+    </div>
   )
 }
 export default Home
