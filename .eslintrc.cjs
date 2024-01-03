@@ -40,6 +40,7 @@ module.exports = {
         // 强制使用箭头函数 instead of binding
         "prefer-arrow-callback": "off",
         // 强制使用 React.createElement instead of JSX
-        "react/react-in-jsx-scope": "off"
+        "react/react-in-jsx-scope": "off",
+        "@typescript-eslint/no-explicit-any": "off"
     }
 }
