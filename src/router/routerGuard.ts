@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import { useLocation, useRoutes, Location, useNavigate, NavigateFunction } from "react-router-dom"
 import useStorage from "@/utils/storage.ts"
-import { RouteObject } from "@/router/type.ts"
+import { RouteObject } from "@/types"
 
 export const searchRouteDetail = (path: string, routes: RouteObject[]): RouteObject | null => {
   for (const item of routes) {
