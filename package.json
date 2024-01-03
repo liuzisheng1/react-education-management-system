@@ -23,7 +23,7 @@
     "echarts": "^5.4.3",
     "less": "^4.2.0",
     "less-loader": "^11.1.4",
-    "lodash": "^4.17.21",
+    "lodash-es": "^4.17.21",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.21.1",
