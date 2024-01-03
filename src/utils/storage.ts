@@ -6,6 +6,7 @@ interface StorageService {
   setItem: (key: string, value: any) => void
   getItem: <T>(key: string) => T | null
   removeItem: (key: string) => void
+  clear: () => void
 }
 
 const getStorage = (type: StorageType): Storage | null => {
@@ -55,11 +56,17 @@ const useStorage = (type: StorageType): StorageService => {
       storage.removeItem(key)
     }
   }
+  const clear = () => {
+    if (storage) {
+      storage.clear()
+    }
+  }
 
   return {
     setItem,
     getItem,
-    removeItem
+    removeItem,
+    clear
   }
 }
 
