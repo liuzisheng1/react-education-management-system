@@ -3,7 +3,7 @@ import dayjs from "dayjs"
 import { useTokenStore } from "@/store"
 
 class DualTokenManager {
-  private isRefreshing = false
+  isRefreshing = false
   private refreshPromise: Promise<string> | null = null
 
   constructor(private apiUrl: string) {}

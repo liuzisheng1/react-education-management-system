@@ -8,14 +8,15 @@ import { checkStatus } from "./status"
 import { isString } from "@/utils/is"
 import { useGlobSetting } from "@/hooks"
 import { joinTimestamp, formatRequestDate } from "./helper"
-import { RequestEnum, ResultEnum, ContentTypeEnum } from "@/enums"
-import { useUserStore } from "@/store"
+import { RequestEnum, ResultEnum, ContentTypeEnum, PageEnum } from "@/enums"
+import DualTokenManager from "./token.ts"
 
 const { success, error } = message
 const storage = useStorage("sessionStorage")
 
 const globSetting = useGlobSetting()
 const urlPrefix = globSetting.urlPrefix || ""
+const tokenManager = new DualTokenManager(globSetting.apiUrl)
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 const transform: AxiosTransform = {
@@ -88,7 +89,7 @@ const transform: AxiosTransform = {
           maskClosable: false,
           onOk: () => {
             storage.clear()
-            window.location.href = "/login"
+            window.location.href = PageEnum.BASE_LOGIN
           }
         })
         break
@@ -144,10 +145,7 @@ const transform: AxiosTransform = {
   // 请求拦截器处理
   requestInterceptors: (config, options) => {
     // 请求之前处理config
-    const {
-      userInfo: { access_token, refresh_token }
-    } = useUserStore()
-    const token = access_token || refresh_token || ""
+    const token = tokenManager.getAccessToken()
     // 如果token存在 则统一设置token
     if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
       // jwt token
@@ -187,7 +185,9 @@ const transform: AxiosTransform = {
     // 请求是否被取消
     const isCancel = axios.isCancel(error)
     if (!isCancel) {
-      checkStatus(error.response && error.response.status, msg).then(() => {})
+      checkStatus(error.response && error.response.status, msg).then(() => {
+        // 登录超时或者被踢，重新登录
+      })
     } else {
       console.warn(error, "请求被取消！")
     }
