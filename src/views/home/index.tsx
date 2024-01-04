@@ -4,6 +4,7 @@ import { PageContainer, ProCard, ProLayout, SettingDrawer } from "@ant-design/pr
 import { Avatar, Image, Space } from "antd"
 import { useState } from "react"
 import defaultProps from "./_defaultProps"
+// import { Outlet } from "react-router-dom"
 export default function index() {
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({
     layout: "side"
