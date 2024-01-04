@@ -92,3 +92,8 @@ export abstract class AxiosTransform {
 
   responseInterceptorsCatch?: (error: Error) => void
 }
+
+export interface TokenRefreshResult {
+  accessToken: string
+  refreshToken: string
+}
