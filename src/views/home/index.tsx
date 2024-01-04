@@ -65,7 +65,7 @@ export default function index() {
             </div>
           ]
         }}
-        menuRender={(props, defaultDom) => (
+        menuRender={(_props, defaultDom) => (
           <>
             {console.log("defaultDom", defaultDom)}
             {defaultDom}
