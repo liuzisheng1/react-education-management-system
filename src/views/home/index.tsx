@@ -4,6 +4,7 @@ import { PageContainer, ProCard, ProLayout, SettingDrawer } from "@ant-design/pr
 import { Avatar, Space } from "antd"
 import { useState } from "react"
 import defaultProps from "./_defaultProps"
+
 export default function index() {
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({
     layout: "side"
@@ -25,9 +26,9 @@ export default function index() {
         location={{
           pathname
         }}
-        collapsed={false}
+        // menu有哪些模式
         menu={{
-          type: "group"
+          type: "sub"
         }}
         actionsRender={(props) => {
           if (props.isMobile) return []
@@ -35,20 +36,19 @@ export default function index() {
             <div
               key={1}
               style={{
-                height: "200px"
+                height: "56px"
               }}
             >
               <Space
                 align="center"
                 size="middle"
                 style={{
-                  width: "100%",
-                  marginBlockStart: "60px"
+                  width: "100%"
                 }}
               >
                 <Avatar
                   src="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"
-                  size="small"
+                  size="large"
                 />
                 <div
                   style={{
@@ -75,7 +75,6 @@ export default function index() {
           <div
             onClick={() => {
               setPathname(item.path || "/welcome")
-              console.log(item, "123")
             }}
           >
             {dom}
