@@ -17,6 +17,9 @@ export class requestAxios {
     const { transform } = this.options
     return transform
   }
+  getAxios(): AxiosInstance {
+    return this.axiosInstance
+  }
 
   // 创建axios实例
   private createAxios(config: CreateAxiosOptions): void {

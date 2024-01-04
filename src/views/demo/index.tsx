@@ -6,7 +6,9 @@ const DemoIndex: React.FC = () => {
   const { count, increment } = useCountStore()
   const [state, setState] = useState([])
   console.log(count)
-  useEffect(() => {}, [])
+  useEffect(() => {
+    console.log(import.meta.env.DEV)
+  }, [])
   const handleGetUserInfo = async () => {
     const res = await getUserInfo()
     res && setState(res)

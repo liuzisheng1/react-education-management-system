@@ -12,6 +12,7 @@ export default defineConfig({
     }
   },
   plugins: [react()],
+  envDir: "/",
   server: {
     host: "127.0.0.1",
     port: 3000,

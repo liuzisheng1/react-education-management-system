@@ -6,10 +6,14 @@ import { deepMerge, isUrl, setObjToUrlParams } from "@/utils/index.ts"
 import useStorage from "@/utils/storage"
 import { checkStatus } from "./status"
 import { isString } from "@/utils/is"
+import { useGlobSetting } from "@/hooks"
 import { joinTimestamp, formatRequestDate } from "./helper"
 import { RequestEnum, ResultEnum, ContentTypeEnum } from "@/enums"
 const { success, error } = message
 const storage = useStorage("sessionStorage")
+
+const globSetting = useGlobSetting()
+const urlPrefix = globSetting.urlPrefix || ""
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 const transform: AxiosTransform = {
@@ -211,9 +215,9 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
           // 消息提示类型
           errorMessageMode: "none",
           // 接口地址
-          // apiUrl: globSetting.apiUrl,
+          apiUrl: globSetting.apiUrl,
           // 接口拼接地址
-          // urlPrefix: urlPrefix,
+          urlPrefix: urlPrefix,
           //  是否加入时间戳
           joinTime: true,
           // 忽略重复请求
