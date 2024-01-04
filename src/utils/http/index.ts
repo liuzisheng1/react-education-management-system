@@ -9,6 +9,8 @@ import { isString } from "@/utils/is"
 import { useGlobSetting } from "@/hooks"
 import { joinTimestamp, formatRequestDate } from "./helper"
 import { RequestEnum, ResultEnum, ContentTypeEnum } from "@/enums"
+import { useUserStore } from "@/store"
+
 const { success, error } = message
 const storage = useStorage("sessionStorage")
 
@@ -39,7 +41,6 @@ const transform: AxiosTransform = {
     }
     const { data } = res
     if (!data) {
-      // return '[HTTP] Request has no return value';
       throw new Error("请求出错，请稍候重试")
     }
     //  这里 code，result，message为 后台统一的字段，需要修改为项目自己的接口返回格式
@@ -143,13 +144,18 @@ const transform: AxiosTransform = {
   // 请求拦截器处理
   requestInterceptors: (config, options) => {
     // 请求之前处理config
-    const token = storage.getItem("token")
+    const {
+      userInfo: { access_token, refresh_token }
+    } = useUserStore()
+    const token = access_token || refresh_token || ""
+    // 如果token存在 则统一设置token
     if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
       // jwt token
       ;(config as Recordable).headers.Authorization = options.authenticationScheme
         ? `${options.authenticationScheme} ${token}`
         : token
     }
+
     return config
   },
   // 响应错误处理
@@ -196,6 +202,7 @@ function createAxios(opt?: Partial<CreateAxiosOptions>) {
       {
         timeout: 10 * 1000,
         authenticationScheme: "",
+        prefixUrl: urlPrefix,
         headers: { "Content-Type": ContentTypeEnum.JSON },
         // 数据处理方式
         transform,
