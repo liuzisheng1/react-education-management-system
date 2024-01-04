@@ -3,6 +3,7 @@ import { Navigate, RouteObject } from "react-router-dom"
 const Login = lazy(() => import("@/views/login"))
 const Home = lazy(() => import("@/views/home"))
 const Demo = lazy(() => import("@/views/demo"))
+const Main = lazy(() => import("@/views/mainConsole"))
 const NotFond404 = lazy(() => import("@/views/notFond/404"))
 
 const routes: RouteObject[] = [
@@ -12,7 +13,17 @@ const routes: RouteObject[] = [
   },
   {
     path: "/home",
-    element: <Home />
+    element: <Home />,
+    children: [
+      {
+        path: "/home",
+        element: <Navigate to="/home/main" />
+      },
+      {
+        path: "/home/main",
+        element: <Main />
+      }
+    ]
   },
   {
     path: "/demo",
