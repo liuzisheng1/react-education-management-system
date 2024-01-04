@@ -1,8 +1,7 @@
 import "./style.less"
 import InfiniteScroll from "react-infinite-scroll-component"
-import { Avatar, Button, Divider, List, Skeleton } from "antd"
+import { Avatar, Divider, List, Skeleton, Tag } from "antd"
 import { useEffect, useState } from "react"
-import { Progress } from "antd"
 interface DataType {
   gender: string
   name: {
@@ -18,7 +17,8 @@ interface DataType {
   }
   nat: string
 }
-const UserAnalytics = () => {
+
+const ConsumptionRanking = () => {
   const [loading, setLoading] = useState(false)
   const [data, setData] = useState<DataType[]>([])
 
@@ -68,18 +68,8 @@ const UserAnalytics = () => {
                 title={<a href="https://ant.design">{item.name.last}</a>}
                 description={item.email}
               />
-              <div className="progress-bar-box" style={{ width: "40%" }}>
-                <Progress percent={30} size="small" />
-                <Button
-                  style={{
-                    backgroundColor: "rgb(206, 227, 252)",
-                    color: "rgb(32,128,240)",
-                    borderRadius: "40px"
-                  }}
-                  type="primary"
-                >
-                  查看
-                </Button>
+              <div>
+                <Tag color="green">￥69800.00</Tag>
               </div>
             </List.Item>
           )}
@@ -88,4 +78,4 @@ const UserAnalytics = () => {
     </div>
   )
 }
-export default UserAnalytics
+export default ConsumptionRanking

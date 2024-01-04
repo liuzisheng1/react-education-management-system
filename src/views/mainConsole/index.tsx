@@ -2,6 +2,8 @@ import "./style.less"
 import MainCard from "@/components/mainConsole/card/mainConsoleCard"
 import MainConsoleEcharts from "@/components/mainConsole/echarts/mainConsoleEcharts"
 import UserAnalytics from "@/components/mainConsole/userAnalytics"
+import LatestOrders from "@/components/mainConsole/latestOrders"
+import ConsumptionRanking from "@/components/mainConsole/consumptionRanking"
 import { ProCard } from "@ant-design/pro-components"
 const Main = () => {
   return (
@@ -20,6 +22,20 @@ const Main = () => {
           <hr />
           <div className="main-progress-box">
             <UserAnalytics />
+          </div>
+        </ProCard>
+      </div>
+      <div className="main-orders-ranking">
+        <ProCard title="最新订单" bordered style={{ maxWidth: "65%" }}>
+          <hr />
+          <div className="main-orders-box">
+            <LatestOrders />
+          </div>
+        </ProCard>
+        <ProCard title="消费排行" bordered style={{ maxWidth: "35%" }}>
+          <hr />
+          <div className="main-ranking-box">
+            <ConsumptionRanking />
           </div>
         </ProCard>
       </div>
