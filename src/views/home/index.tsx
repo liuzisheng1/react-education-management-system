@@ -1,7 +1,7 @@
 import { GithubFilled, InfoCircleFilled, QuestionCircleFilled } from "@ant-design/icons"
 import type { ProSettings } from "@ant-design/pro-components"
 import { PageContainer, ProCard, ProLayout, SettingDrawer } from "@ant-design/pro-components"
-import { Avatar, Image, Space } from "antd"
+import { Avatar, Space } from "antd"
 import { useState } from "react"
 import defaultProps from "./_defaultProps"
 export default function index() {
@@ -19,26 +19,8 @@ export default function index() {
       }}
     >
       <ProLayout
-        bgLayoutImgList={[
-          {
-            src: "https://img.alicdn.com/imgextra/i2/O1CN01O4etvp1DvpFLKfuWq_!!6000000000279-2-tps-609-606.png",
-            left: 85,
-            bottom: 100,
-            height: "303px"
-          },
-          {
-            src: "https://img.alicdn.com/imgextra/i2/O1CN01O4etvp1DvpFLKfuWq_!!6000000000279-2-tps-609-606.png",
-            bottom: -68,
-            right: -45,
-            height: "303px"
-          },
-          {
-            src: "https://img.alicdn.com/imgextra/i3/O1CN018NxReL1shX85Yz6Cx_!!6000000005798-2-tps-884-496.png",
-            bottom: 0,
-            left: 0,
-            width: "331px"
-          }
-        ]}
+        title="教育后台管理系统"
+        logo="https://tse3-mm.cn.bing.net/th/id/OIP-C.4_Cqd5gIv7LealumFw7vVQAAAA?w=150&h=150&c=7&r=0&o=5&pid=1.7"
         {...defaultProps}
         location={{
           pathname
@@ -56,18 +38,12 @@ export default function index() {
                 height: "200px"
               }}
             >
-              <Image
-                width={"100%"}
-                preview={false}
-                height={132}
-                src="https://gw.alipayobjects.com/zos/bmw-prod/d283f09a-64d6-4d59-bfc7-37b49ea0da2b.svg"
-              />
               <Space
                 align="center"
                 size="middle"
                 style={{
                   width: "100%",
-                  marginBlockStart: "32px"
+                  marginBlockStart: "60px"
                 }}
               >
                 <Avatar
@@ -99,6 +75,7 @@ export default function index() {
           <div
             onClick={() => {
               setPathname(item.path || "/welcome")
+              console.log(item, "123")
             }}
           >
             {dom}
@@ -113,7 +90,7 @@ export default function index() {
               minHeight: 800
             }}
           >
-            <div />
+            <h1>123</h1>
           </ProCard>
         </PageContainer>
       </ProLayout>
