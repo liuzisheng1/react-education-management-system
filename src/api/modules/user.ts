@@ -1,4 +1,4 @@
-import { http } from "@/utils/http"
+import { http } from "@/utils/http/index.ts"
 import { BasicResponseModel } from "@/types"
 
 export function getUserInfo() {
