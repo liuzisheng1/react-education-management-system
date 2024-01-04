@@ -1,7 +1,11 @@
+import React, { useEffect } from "react"
 import { useCountStore } from "@/store/createStore"
-export default function index() {
+const DemoIndex: React.FC = () => {
   const { count, increment } = useCountStore()
   console.log(count)
+  useEffect(() => {
+    console.log(import.meta.env.DEV)
+  }, [])
   return (
     <div>
       <h1>{count}</h1>
@@ -9,3 +13,5 @@ export default function index() {
     </div>
   )
 }
+
+export default DemoIndex

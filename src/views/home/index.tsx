@@ -61,12 +61,7 @@ export default function index() {
             </div>
           ]
         }}
-        menuRender={(props, defaultDom) => (
-          <>
-            {console.log("defaultDom", defaultDom)}
-            {defaultDom}
-          </>
-        )}
+        menuRender={(_props, defaultDom) => <>{defaultDom}</>}
         menuItemRender={(item, dom) => (
           <div
             onClick={() => {
@@ -85,7 +80,7 @@ export default function index() {
       <SettingDrawer
         pathname={pathname}
         enableDarkTheme
-        getContainer={() => document.getElementById("custom-setting-drawer-container")}
+        getContainer={() => document.getElementById("custom-modules-drawer-container")}
         settings={settings}
         onSettingChange={(changeSetting) => {
           setSetting(changeSetting)
