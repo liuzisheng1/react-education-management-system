@@ -1,7 +1,7 @@
 import { GithubFilled, InfoCircleFilled, QuestionCircleFilled } from "@ant-design/icons"
 import type { ProSettings } from "@ant-design/pro-components"
-import { PageContainer, ProCard, ProLayout, SettingDrawer } from "@ant-design/pro-components"
-import { Avatar, Space, Button } from "antd"
+import { PageContainer, ProLayout, SettingDrawer } from "@ant-design/pro-components"
+import { Avatar, Space } from "antd"
 import { useState } from "react"
 import defaultProps from "./_defaultProps"
 
@@ -83,15 +83,14 @@ export default function index() {
         {...settings}
       >
         <PageContainer>
-          <ProCard
+          {/* <ProCard
             style={{
               height: "100vh",
               minHeight: 800
             }}
           >
             <h1>123</h1>
-            <Button type="primary">123</Button>
-          </ProCard>
+          </ProCard> */}
         </PageContainer>
       </ProLayout>
       <SettingDrawer
