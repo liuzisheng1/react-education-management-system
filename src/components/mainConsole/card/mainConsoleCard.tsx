@@ -8,63 +8,19 @@ import {
   CaretDownOutlined,
   ArrowDownOutlined
 } from "@ant-design/icons"
+import CountUp from "react-countup"
+import { Statistic } from "antd"
+const formatter = (value: number) => <CountUp end={value} separator="," />
 const MainConsoleCard = () => {
-  const [enrollNum, setEnrollNum] = useState<number>(0)
-  const [ordersNum, setOrdersNum] = useState<number>(0)
-  const [weekAmountNum, setWeekAmountNum] = useState<number>(0)
-  const [monthAmountNum, setMonthAmountNum] = useState<number>(0)
+  const [enrollNum, setEnrollNum] = useState<number>(1689)
+  const [ordersNum, setOrdersNum] = useState<number>(2580)
+  const [weekAmountNum, setWeekAmountNum] = useState<number>(3980)
+  const [monthAmountNum, setMonthAmountNum] = useState<number>(1689552)
   useEffect(() => {
-    const duration = 1000 // 动画持续时间
-    const targetCounts = [1689, 2580, 3980, 1689552] // 目标数字数组
-
-    const incrementValues = targetCounts.map((targetCount) => {
-      return Math.ceil(targetCount / (duration / 16)) // 计算每帧需要增加的值
-    })
-
-    const intervalId = setInterval(() => {
-      setEnrollNum((prevCount) => {
-        if (prevCount < targetCounts[0]) {
-          let newCount = prevCount + incrementValues[0]
-          if (newCount > targetCounts[0]) {
-            newCount = targetCounts[0]
-          }
-          return newCount
-        }
-        return prevCount
-      })
-      setOrdersNum((prevCount) => {
-        if (prevCount < targetCounts[1]) {
-          let newCount = prevCount + incrementValues[1]
-          if (newCount > targetCounts[1]) {
-            newCount = targetCounts[1]
-          }
-          return newCount
-        }
-        return prevCount
-      })
-      setWeekAmountNum((prevCount) => {
-        if (prevCount < targetCounts[1]) {
-          let newCount = prevCount + incrementValues[1]
-          if (newCount > targetCounts[1]) {
-            newCount = targetCounts[1]
-          }
-          return newCount
-        }
-        return prevCount
-      })
-      setMonthAmountNum((prevCount) => {
-        if (prevCount < targetCounts[3]) {
-          let newCount = prevCount + incrementValues[3]
-          if (newCount > targetCounts[3]) {
-            newCount = targetCounts[3]
-          }
-          return newCount
-        }
-        return prevCount
-      })
-    }, 16)
-
-    return () => clearInterval(intervalId) // 清除计时器
+    setEnrollNum
+    setOrdersNum
+    setWeekAmountNum
+    setMonthAmountNum
   }, [])
   return (
     <div className="main-console-card-box">
@@ -79,7 +35,7 @@ const MainConsoleCard = () => {
           <span>
             <ArrowUpOutlined />
           </span>
-          {enrollNum}
+          <Statistic value={enrollNum} precision={2} formatter={formatter} />
         </div>
         <div className="percentage-num">
           <span>
@@ -99,7 +55,7 @@ const MainConsoleCard = () => {
           <span>
             <ArrowUpOutlined />
           </span>
-          {ordersNum}
+          <Statistic value={ordersNum} precision={2} formatter={formatter} />
         </div>
         <div className="percentage-num">
           <span>
@@ -119,7 +75,8 @@ const MainConsoleCard = () => {
           <span>
             <ArrowDownOutlined />
           </span>
-          {weekAmountNum.toLocaleString()}
+          <span>￥</span>
+          <Statistic value={weekAmountNum} precision={2} formatter={formatter} />
         </div>
         <div className="percentage-num">
           <span>
@@ -139,7 +96,8 @@ const MainConsoleCard = () => {
           <span>
             <ArrowDownOutlined />
           </span>
-          {monthAmountNum.toLocaleString()}
+          <span>￥</span>
+          <Statistic value={monthAmountNum} precision={2} formatter={formatter} />
         </div>
         <div className="percentage-num">
           <span>

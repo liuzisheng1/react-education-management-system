@@ -1,6 +1,7 @@
 import "./style.less"
-import MainCard from "@/components/card/mainConsoleCard"
-import MainConsoleEcharts from "@/components/echarts/mainConsoleEcharts"
+import MainCard from "@/components/mainConsole/card/mainConsoleCard"
+import MainConsoleEcharts from "@/components/mainConsole/echarts/mainConsoleEcharts"
+import UserAnalytics from "@/components/mainConsole/userAnalytics"
 import { ProCard } from "@ant-design/pro-components"
 const Main = () => {
   return (
@@ -12,13 +13,14 @@ const Main = () => {
         <ProCard title="订单来源" bordered style={{ maxWidth: "60%" }}>
           <hr />
           <div className="main-echarts-box">
-            {2131231}
             <MainConsoleEcharts />
           </div>
         </ProCard>
         <ProCard title="用户分析" bordered style={{ maxWidth: "40%" }}>
           <hr />
-          <div className="main-progress-box">123</div>
+          <div className="main-progress-box">
+            <UserAnalytics />
+          </div>
         </ProCard>
       </div>
     </div>
