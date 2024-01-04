@@ -7,11 +7,11 @@ export function getUserInfo() {
     method: "get"
   })
 }
-export function login(params: any) {
+export function loginToHome(params: any) {
   return http.request<BasicResponseModel>(
     {
       url: "/login",
-      method: "POST",
+      method: "post",
       params
     },
     {
