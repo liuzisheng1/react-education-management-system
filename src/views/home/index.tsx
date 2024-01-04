@@ -1,9 +1,10 @@
 import { GithubFilled, InfoCircleFilled, QuestionCircleFilled } from "@ant-design/icons"
 import type { ProSettings } from "@ant-design/pro-components"
 import { PageContainer, ProCard, ProLayout, SettingDrawer } from "@ant-design/pro-components"
-import { Avatar, Image, Space } from "antd"
+import { Avatar, Space } from "antd"
 import { useState } from "react"
 import defaultProps from "./_defaultProps"
+
 // import { Outlet } from "react-router-dom"
 export default function index() {
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({
@@ -20,33 +21,15 @@ export default function index() {
       }}
     >
       <ProLayout
-        bgLayoutImgList={[
-          {
-            src: "https://img.alicdn.com/imgextra/i2/O1CN01O4etvp1DvpFLKfuWq_!!6000000000279-2-tps-609-606.png",
-            left: 85,
-            bottom: 100,
-            height: "303px"
-          },
-          {
-            src: "https://img.alicdn.com/imgextra/i2/O1CN01O4etvp1DvpFLKfuWq_!!6000000000279-2-tps-609-606.png",
-            bottom: -68,
-            right: -45,
-            height: "303px"
-          },
-          {
-            src: "https://img.alicdn.com/imgextra/i3/O1CN018NxReL1shX85Yz6Cx_!!6000000005798-2-tps-884-496.png",
-            bottom: 0,
-            left: 0,
-            width: "331px"
-          }
-        ]}
+        title="教育后台管理系统"
+        logo="https://tse3-mm.cn.bing.net/th/id/OIP-C.4_Cqd5gIv7LealumFw7vVQAAAA?w=150&h=150&c=7&r=0&o=5&pid=1.7"
         {...defaultProps}
         location={{
           pathname
         }}
-        collapsed={false}
+        // menu有哪些模式
         menu={{
-          type: "group"
+          type: "sub"
         }}
         actionsRender={(props) => {
           if (props.isMobile) return []
@@ -54,26 +37,19 @@ export default function index() {
             <div
               key={1}
               style={{
-                height: "200px"
+                height: "56px"
               }}
             >
-              <Image
-                width={"100%"}
-                preview={false}
-                height={132}
-                src="https://gw.alipayobjects.com/zos/bmw-prod/d283f09a-64d6-4d59-bfc7-37b49ea0da2b.svg"
-              />
               <Space
                 align="center"
                 size="middle"
                 style={{
-                  width: "100%",
-                  marginBlockStart: "32px"
+                  width: "100%"
                 }}
               >
                 <Avatar
                   src="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"
-                  size="small"
+                  size="large"
                 />
                 <div
                   style={{
@@ -114,7 +90,7 @@ export default function index() {
               minHeight: 800
             }}
           >
-            <div />
+            <h1>123</h1>
           </ProCard>
         </PageContainer>
       </ProLayout>
