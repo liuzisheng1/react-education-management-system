@@ -13,7 +13,9 @@
     "prepare": "husky install"
   },
   "dependencies": {
+    "@ant-design/charts": "^2.0.3",
     "@ant-design/icons": "^5.2.6",
+    "@ant-design/plots": "^2.1.5",
     "@ant-design/pro-components": "^2.6.43",
     "@types/node": "^20.10.6",
     "ahooks": "^3.7.8",
@@ -26,7 +28,9 @@
     "lodash-es": "^4.17.21",
     "qs": "^6.11.2",
     "react": "^18.2.0",
+    "react-countup": "^6.5.0",
     "react-dom": "^18.2.0",
+    "react-infinite-scroll-component": "^6.1.0",
     "react-router-dom": "^6.21.1",
     "zustand": "^4.4.7"
   },
