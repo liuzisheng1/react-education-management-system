@@ -98,6 +98,6 @@ const data: DataType[] = [
   }
 ]
 const LatestOrders = () => {
-  return <Table columns={columns} dataSource={data} />
+  return <Table style={{ overflow: "hidden" }} columns={columns} dataSource={data} />
 }
 export default LatestOrders

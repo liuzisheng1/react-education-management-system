@@ -13,7 +13,17 @@ const routes: RouteObject[] = [
   },
   {
     path: "/home",
-    element: <Home />
+    element: <Home />,
+    children: [
+      {
+        path: "/home",
+        element: <Navigate to="/home/main" /> // 默认跳转
+      },
+      {
+        path: "/home/main",
+        element: <Main />
+      }
+    ]
   },
   {
     path: "/demo",
@@ -22,10 +32,6 @@ const routes: RouteObject[] = [
   {
     path: "/login",
     element: <Login />
-  },
-  {
-    path: "/main",
-    element: <Main />
   },
   {
     path: "/404",
