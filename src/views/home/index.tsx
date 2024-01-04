@@ -1,7 +1,7 @@
 import { GithubFilled, InfoCircleFilled, QuestionCircleFilled } from "@ant-design/icons"
 import type { ProSettings } from "@ant-design/pro-components"
 import { PageContainer, ProCard, ProLayout, SettingDrawer } from "@ant-design/pro-components"
-import { Avatar, Space } from "antd"
+import { Avatar, Space, Button } from "antd"
 import { useState } from "react"
 import defaultProps from "./_defaultProps"
 
@@ -26,9 +26,8 @@ export default function index() {
         location={{
           pathname
         }}
-        // menu有哪些模式
         menu={{
-          type: "sub"
+          type: "group"
         }}
         actionsRender={(props) => {
           if (props.isMobile) return []
@@ -90,13 +89,14 @@ export default function index() {
             }}
           >
             <h1>123</h1>
+            <Button type="primary">123</Button>
           </ProCard>
         </PageContainer>
       </ProLayout>
       <SettingDrawer
         pathname={pathname}
         enableDarkTheme
-        getContainer={() => document.getElementById("test-pro-layout")}
+        getContainer={() => document.getElementById("custom-setting-drawer-container")}
         settings={settings}
         onSettingChange={(changeSetting) => {
           setSetting(changeSetting)
