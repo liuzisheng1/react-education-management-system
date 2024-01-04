@@ -1,11 +1,10 @@
-import { GithubFilled, InfoCircleFilled, QuestionCircleFilled } from "@ant-design/icons"
 import type { ProSettings } from "@ant-design/pro-components"
 import { PageContainer, ProLayout, SettingDrawer } from "@ant-design/pro-components"
 import { Avatar, Space } from "antd"
 import { useState } from "react"
 import defaultProps from "./_defaultProps"
 
-// import { Outlet } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 export default function index() {
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({
     layout: "side"
@@ -58,9 +57,6 @@ export default function index() {
                 >
                   七妮妮
                 </div>
-                <InfoCircleFilled key="InfoCircleFilled" />
-                <QuestionCircleFilled key="QuestionCircleFilled" />
-                <GithubFilled key="GithubFilled" />
               </Space>
             </div>
           ]
@@ -78,14 +74,7 @@ export default function index() {
         {...settings}
       >
         <PageContainer>
-          {/* <ProCard
-            style={{
-              height: "100vh",
-              minHeight: 800
-            }}
-          >
-            <h1>123</h1>
-          </ProCard> */}
+          <Outlet />
         </PageContainer>
       </ProLayout>
       <SettingDrawer
