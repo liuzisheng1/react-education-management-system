@@ -12,6 +12,7 @@ const Main = () => {
         <ProCard title="订单来源" bordered style={{ maxWidth: "60%" }}>
           <hr />
           <div className="main-echarts-box">
+            {2131231}
             <MainConsoleEcharts />
           </div>
         </ProCard>

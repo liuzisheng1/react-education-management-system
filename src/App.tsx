@@ -1,12 +1,12 @@
 import { Suspense } from "react"
-import { useRoutes } from "react-router-dom"
+import { RouterGuard } from "@/router/routerGuard.ts"
 import routes from "@/router"
 
 function App() {
   return (
     <div className="app">
       <Suspense fallback="Loading...">
-        <div className="main">{useRoutes(routes)}</div>
+        <div className="main">{RouterGuard(routes)}</div>
       </Suspense>
     </div>
   )
