@@ -4,8 +4,8 @@ const Login = lazy(() => import("@/views/login"))
 const Home = lazy(() => import("@/views/home"))
 const Demo = lazy(() => import("@/views/demo"))
 const Main = lazy(() => import("@/views/mainConsole"))
-const NotFond404 = lazy(() => import("@/views/notFond/404"))
-
+const MonitoringDesk = lazy(() => import("@/views/monitoringDesk"))
+const WorkBench = lazy(() => import("@/views/workBench"))
 const routes: RouteObject[] = [
   {
     path: "/",
@@ -22,6 +22,14 @@ const routes: RouteObject[] = [
       {
         path: "/home/main",
         element: <Main />
+      },
+      {
+        path: "/home/monitoringDesk",
+        element: <MonitoringDesk />
+      },
+      {
+        path: "/home/workBench",
+        element: <WorkBench />
       }
     ]
   },
