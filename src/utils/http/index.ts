@@ -3,20 +3,20 @@ import { requestAxios } from "./axios.ts"
 import { AxiosTransform, RequestOptions, Result, CreateAxiosOptions } from "@/types"
 import { message, Modal } from "@/utils/lib/antdChunk.ts"
 import { deepMerge, isUrl, setObjToUrlParams } from "@/utils/index.ts"
-import useStorage from "@/utils/storage"
+// import useStorage from "@/utils/storage"
 import { checkStatus } from "./checkStatus.ts"
 import { isString } from "@/utils/is"
 import { useGlobSetting } from "@/hooks"
 import { joinTimestamp, formatRequestDate } from "./helper"
 import { RequestEnum, ResultEnum, ContentTypeEnum, PageEnum } from "@/enums"
-import DualTokenManager from "./dualTokenManager.ts"
+// import DualTokenManager from "./dualTokenManager.ts"
 
 const { success, error } = message
-const storage = useStorage("sessionStorage")
+// const storage = useStorage("sessionStorage")
 
 const globSetting = useGlobSetting()
 const urlPrefix = globSetting.urlPrefix || ""
-const tokenManager = new DualTokenManager(globSetting.apiUrl)
+// const tokenManager = new DualTokenManager(globSetting.apiUrl)
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 const transform: AxiosTransform = {
@@ -88,7 +88,7 @@ const transform: AxiosTransform = {
           closable: false,
           maskClosable: false,
           onOk: () => {
-            storage.clear()
+            // storage.clear()
             window.location.href = PageEnum.BASE_LOGIN
           }
         })
@@ -145,7 +145,7 @@ const transform: AxiosTransform = {
   // 请求拦截器处理
   requestInterceptors: (config, options) => {
     // 请求之前处理config
-    const token = tokenManager.getAccessToken()
+    const token = ""
     // 如果token存在 则统一设置token
     if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
       // jwt token

@@ -13,12 +13,12 @@ export function getUserInfo() {
     method: "get"
   })
 }
-export function loginToHome(params: any) {
+export function login(data: any) {
   return http.request<BasicResponseModel>(
     {
       url: "/api/login",
       method: "post",
-      params
+      data
     },
     {
       // 是否忽略重复请求

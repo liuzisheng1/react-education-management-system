@@ -1,5 +1,9 @@
 export interface BasicResponseModel<T = any> {
   code: number
   message: string
-  result: T
+  status: string
+  result?: T
+  access_token?: string
+  refresh_token?: string
+  expiresIn?: number
 }

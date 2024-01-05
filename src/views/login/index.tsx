@@ -1,4 +1,5 @@
 import React, { CSSProperties } from "react"
+import { useNavigate } from "react-router-dom"
 import {
   AlipayOutlined,
   LockOutlined,
@@ -15,9 +16,11 @@ import {
   ProFormText
 } from "@ant-design/pro-components"
 import { Button, Divider, Space, Tabs, message, theme } from "antd"
+import { PageEnum } from "@/enums"
+import { useTokenStore } from "@/store"
 
 import { useState } from "react"
-import { indexRequest } from "@/api"
+import { login } from "@/api"
 
 type LoginType = "phone" | "account"
 
@@ -27,13 +30,24 @@ const iconStyles: CSSProperties = {
   verticalAlign: "middle",
   cursor: "pointer"
 }
+
 const Login: React.FC = () => {
   const [loginType, setLoginType] = useState<LoginType>("account")
   const { token } = theme.useToken()
+  const navigate = useNavigate()
+  const { setAccessToken, setExpiresIn } = useTokenStore()
+
   const onFinishLogin = async (values: Record<string, any>) => {
-    console.log(values)
-    const res = await indexRequest()
-    console.log(res)
+    const {
+      result: { access_token, expiresIn },
+      code
+    } = await login(values)
+    if (code === 200) {
+      setAccessToken(access_token)
+      setExpiresIn(expiresIn)
+      message.success("登录成功")
+      navigate(PageEnum.BASE_HOME)
+    }
   }
   return (
     <ProConfigProvider dark>

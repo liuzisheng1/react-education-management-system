@@ -1,6 +1,7 @@
 import { message } from "@/utils/lib/antdChunk.ts"
 const { error } = message
 export async function checkStatus(status: number, message: string): Promise<void> {
+  console.log(status, message, "statusstatusstatus")
   switch (status) {
     case 400:
       error(message)

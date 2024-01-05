@@ -9,8 +9,9 @@ class DualTokenManager {
   constructor(private apiUrl: string) {}
 
   public async getAccessToken(): Promise<string | null> {
-    const userStore = useTokenStore()
-    if (this.isAccessTokenExpired(userStore.expiresIn)) {
+    const { expiresIn, accessToken } = useTokenStore()
+    console.log(expiresIn)
+    if (this.isAccessTokenExpired(expiresIn)) {
       // 如果access_token过期并且没有正在刷新，则尝试刷新
       if (!this.isRefreshing) {
         this.isRefreshing = true
@@ -27,22 +28,22 @@ class DualTokenManager {
       }
     }
 
-    return userStore.accessToken
+    return accessToken
   }
 
   private async refreshTokens(): Promise<string> {
-    const userStore = useTokenStore()
+    const { refreshToken, setAccessToken, setExpiresIn, setRefreshToken } = useTokenStore()
     try {
       const response = await axios.post(`${this.apiUrl}/refresh-token`, {
-        refresh_token: userStore.refreshToken
+        refresh_token: refreshToken
       })
 
       if (response.data && response.data.access_token) {
-        userStore.setAccessToken(response.data.access_token)
-        userStore.setExpiresIn(response.data.expires_in)
+        setAccessToken(response.data.access_token)
+        setExpiresIn(response.data.expires_in)
         // 更新refresh_token（如果后端返回了新的refresh_token）
         if (response.data.refresh_token) {
-          userStore.setRefreshToken(response.data.refresh_token)
+          setRefreshToken(response.data.refresh_token)
         }
         return response.data.access_token
       }
