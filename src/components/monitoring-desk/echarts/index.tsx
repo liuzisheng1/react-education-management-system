@@ -1,8 +1,8 @@
 import "./style.less"
-import Itemone from "./echartsItem/oneitem"
-import Itemtwo from "./echartsItem/twoitem"
-import Itemthree from "./echartsItem/threeitem"
-import Itemfour from "./echartsItem/fouritem"
+import Itemone from "@/components/monitoring-desk/echarts/echarts-item/oneitem"
+import Itemtwo from "@/components/monitoring-desk/echarts/echarts-item/twoitem"
+import Itemthree from "@/components/monitoring-desk/echarts/echarts-item/threeitem"
+import Itemfour from "@/components/monitoring-desk/echarts/echarts-item/fouritem"
 import { ProCard } from "@ant-design/pro-components"
 const MonitoringDeskEcharts = () => {
   return (
