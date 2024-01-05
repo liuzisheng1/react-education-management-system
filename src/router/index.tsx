@@ -1,13 +1,12 @@
-import NotFond404 from "@/views/notFond/404"
 import { lazy } from "react"
 import { Navigate, RouteObject } from "react-router-dom"
 const Login = lazy(() => import("@/views/login"))
 const Home = lazy(() => import("@/views/home"))
 const Demo = lazy(() => import("@/views/demo"))
-const Main = lazy(() => import("@/views/mainConsole"))
-const MonitoringDesk = lazy(() => import("@/views/monitoringDesk"))
-const WorkBench = lazy(() => import("@/views/workBench"))
-const NotFond404 = lazy(() => import("@/views/notFond/404"))
+const Main = lazy(() => import("@/views/main-console"))
+const MonitoringDesk = lazy(() => import("@/views/monitoring-desk"))
+const WorkBench = lazy(() => import("@/views/work-bench"))
+const NotFond404 = lazy(() => import("@/views/not-fond/404"))
 const routes: RouteObject[] = [
   {
     path: "/",
@@ -26,11 +25,11 @@ const routes: RouteObject[] = [
         element: <Main />
       },
       {
-        path: "/home/monitoringDesk",
+        path: "/home/monitoring-desk",
         element: <MonitoringDesk />
       },
       {
-        path: "/home/workBench",
+        path: "/home/work-bench",
         element: <WorkBench />
       }
     ]

@@ -1,5 +1,5 @@
 import "./style.less"
-import WorkHeader from "@/components/workBench/workHeader"
+import WorkHeader from "src/components/work-bench/work-header"
 
 const WorkBench = () => {
   return (

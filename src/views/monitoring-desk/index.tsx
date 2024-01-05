@@ -1,6 +1,6 @@
 import "./style.less"
-import Monitoring from "@/components/monitoringDesk/card"
-import MonitoringEcharts from "@/components/monitoringDesk/echarts"
+import Monitoring from "@/components/monitoring-desk/card"
+import MonitoringEcharts from "@/components/monitoring-desk/echarts"
 const MonitoringDesk = () => {
   return (
     <div className="monitoring-box">
