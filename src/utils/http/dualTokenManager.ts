@@ -1,7 +1,11 @@
 import axios from "axios"
 import dayjs from "dayjs"
-import { useTokenStore } from "@/store"
-
+import useStorage from "@/utils/storage.ts"
+const storage = useStorage("localStorage")
+const { setItem, getItem, clear } = storage
+const accessToken = JSON.parse(getItem("access_token"))
+const refreshToken = JSON.parse(getItem("refresh_token"))
+const expiresIn = JSON.parse(getItem("expiresIn"))
 class DualTokenManager {
   isRefreshing = false
   private refreshPromise: Promise<string> | null = null
@@ -9,9 +13,7 @@ class DualTokenManager {
   constructor(private apiUrl: string) {}
 
   public async getAccessToken(): Promise<string | null> {
-    const { expiresIn, accessToken } = useTokenStore()
-    console.log(expiresIn)
-    if (this.isAccessTokenExpired(expiresIn)) {
+    if (this.isAccessTokenExpired(String(expiresIn))) {
       // 如果access_token过期并且没有正在刷新，则尝试刷新
       if (!this.isRefreshing) {
         this.isRefreshing = true
@@ -32,28 +34,26 @@ class DualTokenManager {
   }
 
   private async refreshTokens(): Promise<string> {
-    const { refreshToken, setAccessToken, setExpiresIn, setRefreshToken, clearTokens } =
-      useTokenStore()
     try {
       const response = await axios.post(`${this.apiUrl}/refresh-token`, {
         refresh_token: refreshToken
       })
 
       if (response.data && response.data.access_token) {
-        setAccessToken(response.data.access_token)
-        setExpiresIn(response.data.expires_in)
+        const { access_token, expiresIn } = response.data
+        setItem("access_token", JSON.stringify({ access_token }))
+        setItem("expiresIn", JSON.stringify({ expiresIn }))
         // 更新refresh_token（如果后端返回了新的refresh_token）
         if (response.data.refresh_token) {
-          setRefreshToken(response.data.refresh_token)
+          setItem("refresh_token", JSON.stringify({ refresh_token: response.data.refresh_token }))
         }
         return response.data.access_token
       }
     } catch (error) {
       console.error("Token刷新失败，请重新登录!")
-      clearTokens()
+      clear()
       throw error
     }
-
     return ""
   }
 

@@ -9,14 +9,14 @@ import { isString } from "@/utils/is"
 import { useGlobSetting } from "@/hooks"
 import { joinTimestamp, formatRequestDate } from "./helper"
 import { RequestEnum, ResultEnum, ContentTypeEnum, PageEnum } from "@/enums"
-// import DualTokenManager from "./dualTokenManager.ts"
+import DualTokenManager from "./dualTokenManager.ts"
 
 const { success, error } = message
 // const storage = useStorage("sessionStorage")
 
 const globSetting = useGlobSetting()
 const urlPrefix = globSetting.urlPrefix || ""
-// const tokenManager = new DualTokenManager(globSetting.apiUrl)
+const tokenManager = new DualTokenManager(globSetting.apiUrl)
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 const transform: AxiosTransform = {
@@ -145,7 +145,7 @@ const transform: AxiosTransform = {
   // 请求拦截器处理
   requestInterceptors: (config, options) => {
     // 请求之前处理config
-    const token = ""
+    const token = tokenManager.getAccessToken()
     // 如果token存在 则统一设置token
     if (token && (config as Recordable)?.requestOptions?.withToken !== false) {
       // jwt token

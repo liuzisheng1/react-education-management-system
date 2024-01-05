@@ -17,7 +17,7 @@ import {
 } from "@ant-design/pro-components"
 import { Button, Divider, Space, Tabs, message, theme } from "antd"
 import { PageEnum } from "@/enums"
-import { useTokenStore } from "@/store"
+import useStorage from "@/utils/storage.ts"
 
 import { useState } from "react"
 import { login } from "@/api"
@@ -33,24 +33,34 @@ const iconStyles: CSSProperties = {
 
 const Login: React.FC = () => {
   const [loginType, setLoginType] = useState<LoginType>("account")
+  const [messageApi, contextHolder] = message.useMessage()
   const { token } = theme.useToken()
   const navigate = useNavigate()
-  const { setAccessToken, setExpiresIn } = useTokenStore()
+  const storage = useStorage("localStorage")
+  const { setItem } = storage
 
   const onFinishLogin = async (values: Record<string, any>) => {
     const {
-      result: { access_token, expiresIn },
+      result: { access_token, refresh_token, expiresIn },
       code
     } = await login(values)
     if (code === 200) {
-      setAccessToken(access_token)
-      setExpiresIn(expiresIn)
-      message.success("登录成功")
-      navigate(PageEnum.BASE_HOME)
+      setItem("refresh_token", JSON.stringify({ refresh_token }))
+      setItem("access_token", JSON.stringify({ access_token }))
+      setItem("expiresIn", JSON.stringify({ expiresIn }))
+      messageApi.success({
+        content: "登录成功",
+        duration: 1,
+        onClose: () => {
+          return navigate(PageEnum.BASE_HOME)
+        }
+      })
     }
   }
+  // expiresIn, accessToken
   return (
     <ProConfigProvider dark>
+      {contextHolder}
       <div
         style={{
           backgroundColor: "white",
