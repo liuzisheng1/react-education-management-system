@@ -1,40 +1,50 @@
 import { create } from "zustand"
+import { UserInfo } from "@/types"
+import useStorage from "@/utils/storage.ts"
+const storage = useStorage("localStorage")
+import { login } from "@/api"
+const { setItem, getItem } = storage
 
 interface TokenState {
-  accessToken: string
-  refreshToken: string
-  expiresIn: number | null
-  setAccessToken(token: string): void
-  setRefreshToken(token: string): void
-  clearTokens(): void
-  getExpiresIn(): string | null // 修改了这个getExpiresIn方法，通常它不需要参数用来获取状态
-  setExpiresIn(expiresIn: number): void
+  accessToken: string | null
+  user: UserInfo
+  autoLogin: boolean
+  setToken: (token: string | null, rememberMe: boolean) => void
+  setUser: (user: UserInfo) => void
+  initAutoLogin: () => void
+  login: (
+    username?: string | null,
+    password?: string | null,
+    phone?: number | null,
+    rememberMe?: boolean
+  ) => Promise<void>
 }
 
 export const useTokenStore = create<TokenState>((set) => ({
-  accessToken: "",
-  refreshToken: "",
-  expiresIn: 0,
-
-  setAccessToken(token: string) {
-    set(() => ({ accessToken: token }))
+  accessToken: null,
+  user: {},
+  autoLogin: false,
+  setToken: (token, rememberMe) => {
+    if (rememberMe) {
+      // 这里假设你有一个方法来持久化存储token，比如localStorage或cookies
+      setItem("access_token", JSON.stringify(token))
+    }
+    set({ accessToken: token })
   },
-
-  setRefreshToken(token: string) {
-    set(() => ({ refreshToken: token }))
+  setUser: (user) => set({ user }),
+  login: async (username, password, phone, rememberMe) => {
+    const response = await login({ username, password, phone }) // 假设authenticate是一个异步登录函数
+    if (response && response.code === 200) {
+      set({ accessToken: response?.access_token, user: response?.result?.user })
+      if (rememberMe) {
+        setItem("access_token", JSON.stringify(response?.access_token))
+      }
+    }
   },
-
-  clearTokens() {
-    set(() => ({ accessToken: null, refreshToken: null, expiresIn: null }))
-  },
-
-  // 删除了getExpiresIn的参数，因为它应该用于获取当前的expiresIn值
-  getExpiresIn() {
-    return this.expiresIn
-  },
-
-  // 修复了setExpiresIn方法，现在是正确设置expiresIn字段
-  setExpiresIn(expiresIn: number) {
-    set(() => ({ expiresIn: expiresIn }))
+  initAutoLogin: () => {
+    const { authToken } = JSON.parse(getItem("access_token") || "{}") || {}
+    if (authToken) {
+      set({ accessToken: JSON.stringify(authToken), autoLogin: true })
+    }
   }
 }))
