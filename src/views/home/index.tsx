@@ -2,13 +2,14 @@ import type { ProSettings } from "@ant-design/pro-components"
 import { PageContainer, ProLayout, SettingDrawer } from "@ant-design/pro-components"
 import { Avatar, Space } from "antd"
 import { useState } from "react"
-import defaultProps from "./_defaultProps"
 import { Outlet } from "react-router-dom"
-// import { Outlet } from "react-router-dom"
+import defaultProps from "./_defaultProps"
 export default function index() {
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({
     layout: "side"
   })
+
+  const [isCollapsed, setIsCollapsed] = useState<boolean>(false)
 
   const [pathname, setPathname] = useState("/list/sub-page/sub-sub-page1")
 
@@ -26,16 +27,20 @@ export default function index() {
         location={{
           pathname
         }}
+        onCollapse={() => {
+          setIsCollapsed(!isCollapsed)
+        }}
         menu={{
           type: "group"
         }}
         actionsRender={(props) => {
           if (props.isMobile) return []
           return [
-            <div
+            <Space
               key={1}
               style={{
-                height: "56px"
+                height: "56px",
+                width: "auto"
               }}
             >
               <Space
@@ -49,16 +54,17 @@ export default function index() {
                   src="https://gw.alipayobjects.com/zos/antfincdn/efFD%24IOql2/weixintupian_20170331104822.jpg"
                   size="large"
                 />
-                <div
+                <Space
                   style={{
+                    display: isCollapsed ? "none" : "block",
                     fontSize: "14px",
-                    marginInlineEnd: "32px"
+                    marginInlineEnd: "5px"
                   }}
                 >
                   七妮妮
-                </div>
+                </Space>
               </Space>
-            </div>
+            </Space>
           ]
         }}
         menuRender={(_props, defaultDom) => <>{defaultDom}</>}
