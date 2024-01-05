@@ -32,7 +32,8 @@ class DualTokenManager {
   }
 
   private async refreshTokens(): Promise<string> {
-    const { refreshToken, setAccessToken, setExpiresIn, setRefreshToken } = useTokenStore()
+    const { refreshToken, setAccessToken, setExpiresIn, setRefreshToken, clearTokens } =
+      useTokenStore()
     try {
       const response = await axios.post(`${this.apiUrl}/refresh-token`, {
         refresh_token: refreshToken
@@ -49,7 +50,7 @@ class DualTokenManager {
       }
     } catch (error) {
       console.error("Token刷新失败，请重新登录!")
-      userStore.clearTokens()
+      clearTokens()
       throw error
     }
 
