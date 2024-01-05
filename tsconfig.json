@@ -21,7 +21,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "allowSyntheticDefaultImports": true,
-
+    "types": ["vite/client"],
     "baseUrl": ".",
     "paths": {
       "@/*": [
@@ -38,7 +38,7 @@
       ],
       "@/utils*": [
         "./src/utils*"
-      ],
+      ]
     }
   },
   "include": ["src"],

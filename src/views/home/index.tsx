@@ -1,4 +1,3 @@
-import { GithubFilled, InfoCircleFilled, QuestionCircleFilled } from "@ant-design/icons"
 import type { ProSettings } from "@ant-design/pro-components"
 import { PageContainer, ProLayout, SettingDrawer } from "@ant-design/pro-components"
 import { Avatar, Space } from "antd"
@@ -58,19 +57,11 @@ export default function index() {
                 >
                   七妮妮
                 </div>
-                <InfoCircleFilled key="InfoCircleFilled" />
-                <QuestionCircleFilled key="QuestionCircleFilled" />
-                <GithubFilled key="GithubFilled" />
               </Space>
             </div>
           ]
         }}
-        menuRender={(props, defaultDom) => (
-          <>
-            {console.log("defaultDom", defaultDom)}
-            {defaultDom}
-          </>
-        )}
+        menuRender={(_props, defaultDom) => <>{defaultDom}</>}
         menuItemRender={(item, dom) => (
           <div
             onClick={() => {
@@ -97,7 +88,7 @@ export default function index() {
       <SettingDrawer
         pathname={pathname}
         enableDarkTheme
-        getContainer={() => document.getElementById("custom-setting-drawer-container")}
+        getContainer={() => document.getElementById("custom-modules-drawer-container")}
         settings={settings}
         onSettingChange={(changeSetting) => {
           setSetting(changeSetting)

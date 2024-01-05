@@ -29,7 +29,7 @@ const useStorage = (type: StorageType): StorageService => {
         // 将值转换为字符串存储
         storage.setItem(key, JSON.stringify(value))
       } catch (error) {
-        console.error("Error setting item in storage:", error)
+        console.error("Error modules item in storage:", error)
       }
     }
   }
