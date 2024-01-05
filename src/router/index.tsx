@@ -1,3 +1,4 @@
+import NotFond404 from "@/views/notFond/404"
 import { lazy } from "react"
 import { Navigate, RouteObject } from "react-router-dom"
 const Login = lazy(() => import("@/views/login"))
