@@ -10,6 +10,7 @@ export interface Result<T = any> {
   type?: "success" | "error" | "warning"
   message: string
   result?: T
+  access_token?: string
 }
 
 export interface RequestOptions {
