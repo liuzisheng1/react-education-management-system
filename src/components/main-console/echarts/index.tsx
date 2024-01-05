@@ -51,6 +51,8 @@ const config = {
   ]
 }
 const MainConsoleEcharts = () => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   return <DualAxes {...config} />
 }
 export default MainConsoleEcharts

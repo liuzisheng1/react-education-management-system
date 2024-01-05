@@ -1,3 +1,3 @@
-import { getUserInfo, loginToHome } from "./modules/user"
+import { getUserInfo, loginToHome, indexRequest } from "./modules/user"
 
-export { getUserInfo, loginToHome }
+export { getUserInfo, loginToHome, indexRequest }

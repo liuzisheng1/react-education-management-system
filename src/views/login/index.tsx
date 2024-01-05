@@ -17,6 +17,7 @@ import {
 import { Button, Divider, Space, Tabs, message, theme } from "antd"
 
 import { useState } from "react"
+import { indexRequest } from "@/api"
 
 type LoginType = "phone" | "account"
 
@@ -29,8 +30,10 @@ const iconStyles: CSSProperties = {
 const Login: React.FC = () => {
   const [loginType, setLoginType] = useState<LoginType>("account")
   const { token } = theme.useToken()
-  const onFinishLogin = async (values) => {
+  const onFinishLogin = async (values: Record<string, any>) => {
     console.log(values)
+    const res = await indexRequest()
+    console.log(res)
   }
   return (
     <ProConfigProvider dark>

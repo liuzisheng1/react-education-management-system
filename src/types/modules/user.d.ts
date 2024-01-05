@@ -1,8 +1,11 @@
 type UserInfoType = {
+  _id: string
   name: string
   email: string
-  user_id: string
   username: string
+  password: string
+  phone: string
+  role: string
   welcome: string
   avatar: string
 }
