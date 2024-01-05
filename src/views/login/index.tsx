@@ -29,7 +29,7 @@ const iconStyles: CSSProperties = {
 const Login: React.FC = () => {
   const [loginType, setLoginType] = useState<LoginType>("account")
   const { token } = theme.useToken()
-  const onFinishLogin = async (values) => {
+  const onFinishLogin = async (values: Record<string, any>) => {
     console.log(values)
   }
   return (
