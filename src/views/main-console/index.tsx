@@ -1,9 +1,9 @@
 import "./style.less"
-import MainCard from "@/components/mainConsole/card"
-import MainConsoleEcharts from "@/components/mainConsole/echarts"
-import UserAnalytics from "@/components/mainConsole/userAnalytics"
-import LatestOrders from "@/components/mainConsole/latestOrders"
-import ConsumptionRanking from "@/components/mainConsole/consumptionRanking"
+import MainCard from "@/components/main-console/card"
+import MainConsoleEcharts from "@/components/main-console/echarts"
+import UserAnalytics from "@/components/main-console/user-analytics"
+import LatestOrders from "@/components/main-console/latest-orders"
+import ConsumptionRanking from "@/components/main-console/consumption-ranking"
 import { ProCard } from "@ant-design/pro-components"
 const Main = () => {
   return (
