@@ -1,15 +1,15 @@
 import axios, { AxiosResponse } from "axios"
 import { requestAxios } from "./axios.ts"
 import { AxiosTransform, RequestOptions, Result, CreateAxiosOptions } from "@/types"
-import { message, Modal } from "@/plugins/antd.ts"
+import { message, Modal } from "@/utils/lib/antdChunk.ts"
 import { deepMerge, isUrl, setObjToUrlParams } from "@/utils/index.ts"
 import useStorage from "@/utils/storage"
-import { checkStatus } from "./status"
+import { checkStatus } from "./checkStatus.ts"
 import { isString } from "@/utils/is"
 import { useGlobSetting } from "@/hooks"
 import { joinTimestamp, formatRequestDate } from "./helper"
 import { RequestEnum, ResultEnum, ContentTypeEnum, PageEnum } from "@/enums"
-import DualTokenManager from "./token.ts"
+import DualTokenManager from "./dualTokenManager.ts"
 
 const { success, error } = message
 const storage = useStorage("sessionStorage")
