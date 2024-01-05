@@ -17,6 +17,7 @@
     "@ant-design/icons": "^5.2.6",
     "@ant-design/plots": "^2.1.5",
     "@ant-design/pro-components": "^2.6.43",
+    "@ant-design/pro-skeleton": "^2.1.10",
     "@types/node": "^20.10.6",
     "ahooks": "^3.7.8",
     "antd": "^5.12.6",
