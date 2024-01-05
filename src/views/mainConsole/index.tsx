@@ -1,6 +1,6 @@
 import "./style.less"
-import MainCard from "@/components/mainConsole/card/mainConsoleCard"
-import MainConsoleEcharts from "@/components/mainConsole/echarts/mainConsoleEcharts"
+import MainCard from "@/components/mainConsole/card"
+import MainConsoleEcharts from "@/components/mainConsole/echarts"
 import UserAnalytics from "@/components/mainConsole/userAnalytics"
 import LatestOrders from "@/components/mainConsole/latestOrders"
 import ConsumptionRanking from "@/components/mainConsole/consumptionRanking"

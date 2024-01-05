@@ -4,7 +4,7 @@ import { PageContainer, ProLayout, SettingDrawer } from "@ant-design/pro-compone
 import { Avatar, Space } from "antd"
 import { useState } from "react"
 import defaultProps from "./_defaultProps"
-
+import { Outlet } from "react-router-dom"
 // import { Outlet } from "react-router-dom"
 export default function index() {
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({
@@ -91,6 +91,7 @@ export default function index() {
           >
             <h1>123</h1>
           </ProCard> */}
+          <Outlet />
         </PageContainer>
       </ProLayout>
       <SettingDrawer
