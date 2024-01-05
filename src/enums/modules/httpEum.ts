@@ -8,6 +8,7 @@ export enum RequestEnum {
 
 export enum ResultEnum {
   SUCCESS = 200,
+  AUTHLOGIC = 401,
   FORBIDDEN = 403,
   ERROR = -1,
   TIMEOUT = 10042,
