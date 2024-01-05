@@ -1,4 +1,4 @@
-import { message } from "@/plugins/antd.ts"
+import { message } from "@/utils/lib/antdChunk.ts"
 const { error } = message
 export async function checkStatus(status: number, message: string): Promise<void> {
   switch (status) {

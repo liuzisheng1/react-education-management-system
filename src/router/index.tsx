@@ -7,6 +7,7 @@ const Demo = lazy(() => import("@/views/demo"))
 const Main = lazy(() => import("@/views/mainConsole"))
 const MonitoringDesk = lazy(() => import("@/views/monitoringDesk"))
 const WorkBench = lazy(() => import("@/views/workBench"))
+const NotFond404 = lazy(() => import("@/views/notFond/404"))
 const routes: RouteObject[] = [
   {
     path: "/",
