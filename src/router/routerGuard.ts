@@ -1,7 +1,5 @@
 import { useState, useEffect } from "react"
 import { useLocation, useRoutes, Location, useNavigate, NavigateFunction } from "react-router-dom"
-
-// import { useLocation, useNavigate, Location, NavigateFunction } from "react-router-dom"
 import useStorage from "@/utils/storage.ts"
 import { RouteObject } from "@/types"
 
@@ -14,7 +12,6 @@ const useAuthCheck = (tokenKey: string) => {
   useEffect(() => {
     !authChecked && (!isTokenValid ? navigate("/login") : setAuthChecked(true))
   }, [navigate, authChecked, isTokenValid])
-
   return authChecked
 }
 

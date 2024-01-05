@@ -1,11 +1,14 @@
 import axios from "axios"
 import dayjs from "dayjs"
 import useStorage from "@/utils/storage.ts"
+import { PageEnum } from "@/enums"
 const storage = useStorage("localStorage")
 const { setItem, getItem, clear } = storage
-const accessToken = JSON.parse(getItem("access_token"))
-const refreshToken = JSON.parse(getItem("refresh_token"))
-const expiresIn = JSON.parse(getItem("expiresIn"))
+const isStorage = Object.keys(localStorage).length === 0
+const { accessToken } = !isStorage && JSON.parse(getItem("access_token"))
+const { refreshToken } = !isStorage && JSON.parse(getItem("refresh_token"))
+const { expiresIn } = !isStorage && JSON.parse(getItem("expiresIn"))
+// const navigate = useNavigate()
 class DualTokenManager {
   isRefreshing = false
   private refreshPromise: Promise<string> | null = null
@@ -13,7 +16,7 @@ class DualTokenManager {
   constructor(private apiUrl: string) {}
 
   public async getAccessToken(): Promise<string | null> {
-    if (this.isAccessTokenExpired(String(expiresIn))) {
+    if (this.isAccessTokenExpired(expiresIn)) {
       // 如果access_token过期并且没有正在刷新，则尝试刷新
       if (!this.isRefreshing) {
         this.isRefreshing = true
@@ -36,8 +39,10 @@ class DualTokenManager {
   private async refreshTokens(): Promise<string> {
     try {
       const response = await axios.post(`${this.apiUrl}/refresh-token`, {
-        refresh_token: refreshToken
+        refresh_token: refreshToken,
+        expiresIn
       })
+      console.log(this.apiUrl, response, "response,response")
 
       if (response.data && response.data.access_token) {
         const { access_token, expiresIn } = response.data
@@ -50,25 +55,19 @@ class DualTokenManager {
         return response.data.access_token
       }
     } catch (error) {
-      console.error("Token刷新失败，请重新登录!")
       clear()
+      window.location.href = PageEnum.BASE_LOGIN
       throw error
     }
     return ""
   }
 
-  private isAccessTokenExpired(accessToken: string | null): boolean {
+  private isAccessTokenExpired(accessTokenExpiresIn: number | null): boolean {
     // 根据实际情况判断access_token是否过期
     // 这里假设你有一个方法可以获取access_token的有效期时间戳
-    const expirationTimestamp = this.getExpirationTimestampFromToken(accessToken)
-    return !!expirationTimestamp && dayjs().valueOf() > expirationTimestamp
-  }
-
-  // 获取access_token的过期时间戳，这里仅作示例，实际逻辑请根据你的应用情况进行修改
-  private getExpirationTimestampFromToken(accessToken: string | null): number | null {
-    const now = dayjs()
-    const expirationDate = now.add(Number(accessToken), "second")
-    return expirationDate.valueOf() || null
+    const currentTimeInSeconds = Math.floor(dayjs().valueOf() / 1000)
+    const expirationTimestamp = accessTokenExpiresIn || null
+    return !!expirationTimestamp && currentTimeInSeconds > expirationTimestamp
   }
 }
 

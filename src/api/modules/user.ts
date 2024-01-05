@@ -26,3 +26,10 @@ export function login(data: any) {
     }
   )
 }
+
+export const getRefreshToken = (data: { refresh_token: string }) =>
+  http.request({
+    url: "/api/refresh_token",
+    method: "POST",
+    data
+  })

@@ -44,7 +44,7 @@ const Login: React.FC = () => {
       result: { access_token, refresh_token, expiresIn },
       code
     } = await login(values)
-    if (code === 200) {
+    if (access_token && code === 200) {
       setItem("refresh_token", JSON.stringify({ refresh_token }))
       setItem("access_token", JSON.stringify({ access_token }))
       setItem("expiresIn", JSON.stringify({ expiresIn }))
