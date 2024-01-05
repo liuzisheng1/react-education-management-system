@@ -1,7 +1,7 @@
 import { ProCard } from "@ant-design/pro-components"
 import "./style.less"
 import WorkHeader from "@/components/work-bench/work-header"
-import WorkDemo from "@/components/workBench/workDemo"
+import WorkDemo from "@/components/workBench/work-demo"
 import WorkQuick from "@/components/workBench/workQuick"
 import WorkDynamic from "@/components/workBench/workDynamic"
 import workimg from "./images/imglogo.png"
