@@ -2,7 +2,7 @@ import type { ProSettings } from "@ant-design/pro-components"
 import { PageContainer, ProLayout, SettingDrawer } from "@ant-design/pro-components"
 import { Avatar, Space } from "antd"
 import { useState } from "react"
-import { Outlet } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
 import defaultProps from "./_defaultProps"
 export default function index() {
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({
@@ -11,8 +11,9 @@ export default function index() {
 
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false)
 
-  const [pathname, setPathname] = useState("/list/sub-page/sub-sub-page1")
+  const [pathname, setPathname] = useState("/home/main")
 
+  const navigate = useNavigate()
   return (
     <div
       id="test-pro-layout"
@@ -72,6 +73,7 @@ export default function index() {
           <div
             onClick={() => {
               setPathname(item.path || "/welcome")
+              navigate(item.path, { replace: true })
             }}
           >
             {dom}
@@ -80,14 +82,6 @@ export default function index() {
         {...settings}
       >
         <PageContainer>
-          {/* <ProCard
-            style={{
-              height: "100vh",
-              minHeight: 800
-            }}
-          >
-            <h1>123</h1>
-          </ProCard> */}
           <Outlet />
         </PageContainer>
       </ProLayout>
