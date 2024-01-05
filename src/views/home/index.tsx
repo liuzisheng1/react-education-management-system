@@ -1,9 +1,11 @@
 import type { ProSettings } from "@ant-design/pro-components"
 import { PageContainer, ProLayout, SettingDrawer } from "@ant-design/pro-components"
 import { Avatar, Space } from "antd"
-import { useState } from "react"
-import { Outlet } from "react-router-dom"
+import { useState, useEffect } from "react"
+import { Outlet, useNavigate } from "react-router-dom"
 import defaultProps from "./_defaultProps"
+import ProSkeleton from "@ant-design/pro-skeleton"
+
 export default function index() {
   const [settings, setSetting] = useState<Partial<ProSettings> | undefined>({
     layout: "side"
@@ -11,8 +13,19 @@ export default function index() {
 
   const [isCollapsed, setIsCollapsed] = useState<boolean>(false)
 
-  const [pathname, setPathname] = useState("/list/sub-page/sub-sub-page1")
+  const [pathname, setPathname] = useState("/home/main")
 
+  // 根据实际情况判断是否展示骨架屏，这里仅作示例用法
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    // 模拟数据加载完成
+    setTimeout(() => {
+      setIsLoading(false)
+    }, 1000)
+  }, [])
+
+  const navigate = useNavigate()
   return (
     <div
       id="test-pro-layout"
@@ -72,6 +85,7 @@ export default function index() {
           <div
             onClick={() => {
               setPathname(item.path || "/welcome")
+              navigate(item.path, { replace: true })
             }}
           >
             {dom}
@@ -80,15 +94,10 @@ export default function index() {
         {...settings}
       >
         <PageContainer>
-          {/* <ProCard
-            style={{
-              height: "100vh",
-              minHeight: 800
-            }}
-          >
-            <h1>123</h1>
-          </ProCard> */}
-          <Outlet />
+          {/* 如果还在加载状态，显示骨架屏 */}
+          {isLoading && <ProSkeleton active />}
+          {/* 当内容加载完毕，通过Outlet展示实际路由匹配到的子组件 */}
+          {!isLoading && <Outlet />}
         </PageContainer>
       </ProLayout>
       <SettingDrawer
