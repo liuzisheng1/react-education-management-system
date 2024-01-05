@@ -4,7 +4,8 @@ export type {
   CreateAxiosOptions,
   Result,
   UploadFileParams,
-  AxiosTransform
+  AxiosTransform,
+  TokenRefreshResult
 } from "./modules/http"
 export type { RouteObject } from "./modules/router"
 export type { BasicResponseModel } from "./modules/api"

@@ -1,8 +1,8 @@
 import axios, { AxiosRequestConfig, AxiosInstance, AxiosResponse } from "axios"
 import { RequestOptions, CreateAxiosOptions, Result } from "@/types"
-import { AxiosCanceler } from "./cancel"
+import { AxiosCanceler } from "./axiosCancel.ts"
 import { isFunction } from "@/utils/is"
-import { cloneDeep } from "@/utils/lodashChunk"
+import { cloneDeep } from "@/utils/lib/lodashChunk.ts"
 
 export class requestAxios {
   private axiosInstance: AxiosInstance
