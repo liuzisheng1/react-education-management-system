@@ -1,16 +1,22 @@
 import { http } from "@/utils/http/index.ts"
 import { BasicResponseModel } from "@/types"
 
+export const indexRequest = () =>
+  http.request<BasicResponseModel>({
+    url: "/api/",
+    method: "get"
+  })
+
 export function getUserInfo() {
   return http.request({
-    url: "/admin_info",
+    url: "/api/admin_info",
     method: "get"
   })
 }
 export function loginToHome(params: any) {
   return http.request<BasicResponseModel>(
     {
-      url: "/login",
+      url: "/api/login",
       method: "post",
       params
     },
