@@ -1,4 +1,5 @@
 import React, { CSSProperties } from "react"
+import { useNavigate } from "react-router-dom"
 import {
   AlipayOutlined,
   LockOutlined,
@@ -15,9 +16,11 @@ import {
   ProFormText
 } from "@ant-design/pro-components"
 import { Button, Divider, Space, Tabs, message, theme } from "antd"
+import { PageEnum } from "@/enums"
+import useStorage from "@/utils/storage.ts"
 
 import { useState } from "react"
-import { indexRequest } from "@/api"
+import { login } from "@/api"
 
 type LoginType = "phone" | "account"
 
@@ -27,16 +30,37 @@ const iconStyles: CSSProperties = {
   verticalAlign: "middle",
   cursor: "pointer"
 }
+
 const Login: React.FC = () => {
   const [loginType, setLoginType] = useState<LoginType>("account")
+  const [messageApi, contextHolder] = message.useMessage()
   const { token } = theme.useToken()
+  const navigate = useNavigate()
+  const storage = useStorage("localStorage")
+  const { setItem } = storage
+
   const onFinishLogin = async (values: Record<string, any>) => {
-    console.log(values)
-    const res = await indexRequest()
-    console.log(res)
+    const {
+      result: { access_token, refresh_token, expiresIn },
+      code
+    } = await login(values)
+    if (access_token && code === 200) {
+      setItem("refresh_token", JSON.stringify({ refresh_token }))
+      setItem("access_token", JSON.stringify({ access_token }))
+      setItem("expiresIn", JSON.stringify({ expiresIn }))
+      messageApi.success({
+        content: "登录成功",
+        duration: 1,
+        onClose: () => {
+          return navigate(PageEnum.BASE_HOME)
+        }
+      })
+    }
   }
+  // expiresIn, accessToken
   return (
     <ProConfigProvider dark>
+      {contextHolder}
       <div
         style={{
           backgroundColor: "white",

@@ -1,10 +1,10 @@
 import { create } from "zustand"
 import { persist } from "zustand/middleware"
-import { IUserState } from "@/types"
+import { User } from "@/types"
 
 interface LoginState {
-  userInfo: IUserState | any
-  setUserInfo: (info: IUserState) => void
+  userInfo: User | any
+  setUserInfo: (info: User) => void
 }
 
 export const useUserStore = create<LoginState>()(
